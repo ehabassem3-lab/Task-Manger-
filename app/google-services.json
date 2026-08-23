@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "268055232765",
+    "project_id": "ehab-6b005",
+    "storage_bucket": "ehab-6b005.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268055232765:android:ee64139a9f06a6460d3e94",
+        "android_client_info": {
+          "package_name": "com.example.first"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPYpkrtE3tIS1rTfsTjV4br4guVVudo_s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268055232765:android:f8ecd45d5e6575bc0d3e94",
+        "android_client_info": {
+          "package_name": "com.example.taskmanger"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPYpkrtE3tIS1rTfsTjV4br4guVVudo_s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

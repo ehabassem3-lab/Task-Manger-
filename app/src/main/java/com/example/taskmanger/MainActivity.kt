@@ -1,47 +1,66 @@
-package com.example.taskmanger
+    package com.example.taskmanger
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.taskmanger.ui.theme.TaskMangerTheme
+    import android.os.Bundle
+    import androidx.activity.ComponentActivity
+    import androidx.activity.compose.setContent
+    import androidx.activity.enableEdgeToEdge
+    import androidx.compose.runtime.Composable
+    import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+    import androidx.navigation.compose.NavHost
+    import androidx.navigation.compose.composable
+    import androidx.navigation.compose.rememberNavController
+    import com.example.taskmanger.auth.screens.signin.SignInView
+    import com.example.taskmanger.routes.AppRoutes
+    import com.example.taskmanger.ui.theme.TaskMangerTheme
+    import dagger.hilt.android.AndroidEntryPoint
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            TaskMangerTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Ehab Assem",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+    @AndroidEntryPoint
+
+    class MainActivity : ComponentActivity() {
+        override fun onCreate(savedInstanceState: Bundle?) {
+            installSplashScreen()
+            super.onCreate(savedInstanceState)
+            enableEdgeToEdge()
+            setContent {
+                TaskMangerTheme {
+                    App()
                 }
             }
         }
-    }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    TaskMangerTheme {
-        Greeting("Android")
     }
-}
+
+
+
+    @Composable
+    fun App(){
+        val navController = rememberNavController()
+        NavHost(
+            navController = navController ,
+            startDestination= AppRoutes.SignInRoute
+        ){
+            composable <AppRoutes.SignInRoute>{
+                SignInView()
+            }
+
+        }
+    }
+
+
+
+    //@Preview(showBackground = true)
+    //@Composable
+    //fun Preview() {
+    //    CustomTextField(
+    //        text = "ehab ",
+    //        hintText = "ehab assem ",
+    //        onValueChange = {},
+    //        isSearchBar = true,
+    //        onSearchClick = {} ,
+    //        isPassword = true
+    //    )
+    //
+    //
+    //}
+
+
