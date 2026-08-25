@@ -24,7 +24,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
 import com.example.taskmanger.R
+import com.example.taskmanger.routes.AppRoutes
 import com.example.taskmanger.ui.theme.AppTypography
 import com.example.taskmanger.ui.theme.Primary
 import com.example.taskmanger.ui.theme.Secondary
@@ -32,6 +34,7 @@ import com.example.taskmanger.utilities.CustomTextField
 
 @Composable
 fun SignInView(
+    navController: NavController ,
       viewModel: SignInViewModel = hiltViewModel()
 ){
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -103,6 +106,7 @@ fun SignInView(
         Text(
             "Dont Have An Account? Create Account" ,
             modifier = Modifier.padding(vertical = 5.dp).clickable{
+                navController.navigate(AppRoutes.SignUpRoute)
 
             },
              style =  AppTypography.bodyMedium.copy(fontSize = 16.sp , color = Secondary  , fontWeight = FontWeight.Bold)

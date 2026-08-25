@@ -10,6 +10,7 @@
     import androidx.navigation.compose.composable
     import androidx.navigation.compose.rememberNavController
     import com.example.taskmanger.auth.screens.signin.SignInView
+    import com.example.taskmanger.auth.screens.signup.SignUpView
     import com.example.taskmanger.routes.AppRoutes
     import com.example.taskmanger.ui.theme.TaskMangerTheme
     import dagger.hilt.android.AndroidEntryPoint
@@ -40,7 +41,10 @@
             startDestination= AppRoutes.SignInRoute
         ){
             composable <AppRoutes.SignInRoute>{
-                SignInView()
+                SignInView(navController)
+            }
+            composable <AppRoutes.SignUpRoute>{
+                SignUpView(navController)
             }
 
         }
