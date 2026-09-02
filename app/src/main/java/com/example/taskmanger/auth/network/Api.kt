@@ -37,13 +37,10 @@ fun createHttpClient() : HttpClient {
         defaultRequest {
             url(  "https://api.themoviedb.org/3/")
             contentType(ContentType.Application.Json)
-            url {
-                parameters.append("language", Locale.getDefault().toLanguageTag())
-            }
+
             headers{
                 header("accept", "application/json")
                 header("content-type", "application/json")
-                header("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlNmZhYmY2ZTYzNDI2MzYzOTNlNTM1NDFjY2E1M2IyYSIsIm5iZiI6MTc0OTkxNTYzMy4zNTYsInN1YiI6IjY4NGQ5N2YxM2E0YTY0M2Q3ZTNkZjc2YSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.xAAsuBAoIevhJ2Fwg5Fgmf2ieYXkN77LNSZMniszvyo")
             }
 
 

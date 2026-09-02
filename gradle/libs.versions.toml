@@ -36,6 +36,7 @@ accompanistPermissions = "0.37.3"
 navigationCompose = "2.9.0"
 
 secrets = "2.0.1"
+firebaseAuthKtx = "24.2.0"
 
 
 [libraries]
@@ -102,6 +103,7 @@ accompanist-permissions = { group = "com.google.accompanist", name = "accompanis
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
 
 
 [plugins]

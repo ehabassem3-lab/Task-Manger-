@@ -13,28 +13,38 @@
     import com.example.taskmanger.auth.screens.signup.SignUpView
     import com.example.taskmanger.routes.AppRoutes
     import com.example.taskmanger.ui.theme.TaskMangerTheme
+    import com.google.firebase.Firebase
+    import com.google.firebase.auth.FirebaseAuth
+    import com.google.firebase.auth.auth
     import dagger.hilt.android.AndroidEntryPoint
+     lateinit var auth: FirebaseAuth
 
     @AndroidEntryPoint
 
     class MainActivity : ComponentActivity() {
         override fun onCreate(savedInstanceState: Bundle?) {
             installSplashScreen()
+            auth = Firebase.auth
             super.onCreate(savedInstanceState)
             enableEdgeToEdge()
             setContent {
-                TaskMangerTheme {
-                    App()
+                val currentUser = auth.currentUser
+                if (currentUser == null) {
+                    TaskMangerTheme {
+                        App()
+                    }
                 }
+                }
+
             }
         }
 
-    }
+
 
 
 
     @Composable
-    fun App(){
+    fun App( ){
         val navController = rememberNavController()
         NavHost(
             navController = navController ,
