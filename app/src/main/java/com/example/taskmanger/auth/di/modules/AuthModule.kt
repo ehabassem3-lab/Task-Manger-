@@ -2,29 +2,23 @@ package com.example.taskmanger.auth.di.modules
 
 import com.example.taskmanger.auth.data.AuthRemoteDataSource
 import com.example.taskmanger.auth.data.AuthRemoteDataSourceImpl
-import com.example.taskmanger.auth.network.createHttpClient
+import com.example.taskmanger.auth.data.repository.AuthRepositoryImpl
+import com.example.taskmanger.auth.di.domain.AuthRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.ktor.client.HttpClient
 import javax.inject.Singleton
-
 
 @Module
 @InstallIn(SingletonComponent::class)
-object NetworkModule {
+abstract class AuthModule {
 
-    @Provides
+
+    @Binds
     @Singleton
-    fun provideHttpClient(): HttpClient {
-        return createHttpClient()
-    }
+    abstract  fun bindAuthDataSource(
+        impl: AuthRemoteDataSourceImpl
+    ) : AuthRemoteDataSource
 }
-
-
-
-
-
-

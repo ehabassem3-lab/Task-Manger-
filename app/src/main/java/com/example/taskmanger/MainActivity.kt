@@ -11,6 +11,7 @@
     import androidx.navigation.compose.rememberNavController
     import com.example.taskmanger.auth.screens.signin.SignInView
     import com.example.taskmanger.auth.screens.signup.SignUpView
+    import com.example.taskmanger.manger.screens.tabs.HomeTabView
     import com.example.taskmanger.routes.AppRoutes
     import com.example.taskmanger.ui.theme.TaskMangerTheme
     import com.google.firebase.Firebase
@@ -28,16 +29,16 @@
             super.onCreate(savedInstanceState)
             enableEdgeToEdge()
             setContent {
-                val currentUser = auth.currentUser
-                if (currentUser == null) {
+//                val currentUser = auth.currentUser
+//                if (currentUser == null) {
                     TaskMangerTheme {
                         App()
                     }
-                }
-                }
+             }
+               }
 
             }
-        }
+//        }
 
 
 
@@ -50,6 +51,9 @@
             navController = navController ,
             startDestination= AppRoutes.SignInRoute
         ){
+            composable <AppRoutes.HomeTabRoute>{
+                HomeTabView()
+            }
             composable <AppRoutes.SignInRoute>{
                 SignInView(navController)
             }
