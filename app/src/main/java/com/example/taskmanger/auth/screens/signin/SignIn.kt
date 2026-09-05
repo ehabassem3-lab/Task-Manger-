@@ -91,7 +91,7 @@ fun SignInView(
             modifier = Modifier.padding(top = 30.dp).width(350.dp).height(60.dp).background(Secondary,
                 RoundedCornerShape(12.dp)
             ).clickable{
-
+                     viewModel.onEvent(SignInEvents.SignInClick(state.email,state.password))
             } ,
 
             contentAlignment = Alignment.Center

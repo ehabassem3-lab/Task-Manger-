@@ -1,12 +1,18 @@
 package com.example.taskmanger.auth.screens.signin
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.taskmanger.auth.di.domain.AuthRepository
+import com.example.taskmanger.utilities.Resources
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SignInViewModel @Inject constructor() : ViewModel() {
+class SignInViewModel @Inject constructor(
+   private  val authRepository: AuthRepository
+) : ViewModel() {
     val state  : MutableStateFlow<SignInStates> = MutableStateFlow(SignInStates())
 
 
@@ -21,8 +27,37 @@ class SignInViewModel @Inject constructor() : ViewModel() {
                 state.value= state.value.copy(password = event.password)
             }
 
+            is SignInEvents.SignInClick -> signIn(event.email,event.password)
+            SignInEvents.onSignOut -> signOut()
         }
 
+    }
+
+    private fun signOut() {
+
+        viewModelScope.launch {
+
+            authRepository.signOut()
+        }
+    }
+
+    private fun signIn(email: String, password: String) {
+         viewModelScope.launch {
+              state.value =state.value.copy(signInApi =  Resources.Loading)
+             val request = authRepository.signIn(email,password)
+             if(request.isSuccess){
+
+                 state.value =state.value.copy(signInApi =  Resources.Success(request.getOrNull()))
+
+
+             }else{
+                 state.value =state.value.copy(signInApi =  Resources.Error(Throwable(request.exceptionOrNull())))
+
+             }
+
+
+
+         }
     }
 
 
