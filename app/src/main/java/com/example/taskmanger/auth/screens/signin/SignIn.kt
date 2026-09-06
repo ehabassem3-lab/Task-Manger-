@@ -14,6 +14,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,6 +32,7 @@ import com.example.taskmanger.ui.theme.AppTypography
 import com.example.taskmanger.ui.theme.Primary
 import com.example.taskmanger.ui.theme.Secondary
 import com.example.taskmanger.utilities.CustomTextField
+import com.example.taskmanger.utilities.Resources
 
 @Composable
 fun SignInView(
@@ -38,11 +40,26 @@ fun SignInView(
       viewModel: SignInViewModel = hiltViewModel()
 ){
     val state by viewModel.state.collectAsStateWithLifecycle()
+    LaunchedEffect(state.signInApi) {
+        when(state.signInApi){
+            is Resources.Error -> {}
+            Resources.Idle -> {
+
+            }
+            Resources.Loading -> {
+
+            }
+            is Resources.Success<*> -> {
+                navController.navigate(AppRoutes.HomeTabRoute)
+            }
+        }
+
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Primary)
-            .padding(top = 50.dp , bottom = 50.dp , start = 20.dp , end = 20.dp) ,
+            .padding(top = 50.dp, bottom = 50.dp, start = 20.dp, end = 20.dp) ,
          horizontalAlignment = Alignment.CenterHorizontally
 
     ) {
@@ -50,7 +67,9 @@ fun SignInView(
             painter = painterResource(R.drawable.ic_sign_in ),
             contentDescription = "" ,
             tint = Secondary ,
-            modifier = Modifier.padding(top = 60.dp).size(200.dp)
+            modifier = Modifier
+                .padding(top = 60.dp)
+                .size(200.dp)
 
         )
         Text(
@@ -79,20 +98,28 @@ fun SignInView(
         )
         Text(
             "Forget PassWord" ,
-            modifier = Modifier.padding(start = 150.dp, top = 10.dp).clickable{
+            modifier = Modifier
+                .padding(start = 150.dp, top = 10.dp)
+                .clickable {
 
-            },
+                },
             style =  AppTypography.bodyMedium.copy(fontSize = 18.sp , color = Secondary  , fontWeight = FontWeight.Normal)
 
         )
 
 
         Box(
-            modifier = Modifier.padding(top = 30.dp).width(350.dp).height(60.dp).background(Secondary,
-                RoundedCornerShape(12.dp)
-            ).clickable{
-                     viewModel.onEvent(SignInEvents.SignInClick(state.email,state.password))
-            } ,
+            modifier = Modifier
+                .padding(top = 30.dp)
+                .width(350.dp)
+                .height(60.dp)
+                .background(
+                    Secondary,
+                    RoundedCornerShape(12.dp)
+                )
+                .clickable {
+                    viewModel.onEvent(SignInEvents.SignInClick(state.email, state.password))
+                } ,
 
             contentAlignment = Alignment.Center
         ){
@@ -105,10 +132,12 @@ fun SignInView(
 
         Text(
             "Dont Have An Account? Create Account" ,
-            modifier = Modifier.padding(vertical = 5.dp).clickable{
-                navController.navigate(AppRoutes.SignUpRoute)
+            modifier = Modifier
+                .padding(vertical = 5.dp)
+                .clickable {
+                    navController.navigate(AppRoutes.SignUpRoute)
 
-            },
+                },
              style =  AppTypography.bodyMedium.copy(fontSize = 16.sp , color = Secondary  , fontWeight = FontWeight.Bold)
 
         )

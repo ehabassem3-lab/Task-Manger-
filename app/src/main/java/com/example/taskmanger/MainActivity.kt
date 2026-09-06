@@ -29,30 +29,34 @@
             super.onCreate(savedInstanceState)
             enableEdgeToEdge()
             setContent {
-//                val currentUser = auth.currentUser
-//                if (currentUser == null) {
+               val currentUser = auth.currentUser
+               if (currentUser == null) {
                     TaskMangerTheme {
-                        App()
+                        App(AppRoutes.SignInRoute)
                     }
-             }
+             }else{
+                   TaskMangerTheme {
+                       App(AppRoutes.HomeTabRoute)
+                   }
+               }
                }
 
             }
-//        }
+       }
 
 
 
 
 
     @Composable
-    fun App( ){
+    fun App(route : AppRoutes){
         val navController = rememberNavController()
         NavHost(
             navController = navController ,
-            startDestination= AppRoutes.SignInRoute
+            startDestination= route ,
         ){
             composable <AppRoutes.HomeTabRoute>{
-                HomeTabView()
+                HomeTabView(navController)
             }
             composable <AppRoutes.SignInRoute>{
                 SignInView(navController)

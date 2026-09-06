@@ -5,7 +5,8 @@ import com.example.taskmanger.utilities.Resources
 data class SignInStates(
     val email : String = "" ,
     val password : String = "" ,
-    val signInApi : Resources<Unit> = Resources.Idle
+    val signInApi : Resources<Unit> = Resources.Idle ,
+    val signOutApi : Resources<Unit> = Resources.Idle
 
 
 )
