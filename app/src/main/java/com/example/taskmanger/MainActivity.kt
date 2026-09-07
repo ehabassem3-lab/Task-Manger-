@@ -9,6 +9,7 @@
     import androidx.navigation.compose.NavHost
     import androidx.navigation.compose.composable
     import androidx.navigation.compose.rememberNavController
+    import com.example.taskmanger.auth.screens.SplashScreenView
     import com.example.taskmanger.auth.screens.signin.SignInView
     import com.example.taskmanger.auth.screens.signup.SignUpView
     import com.example.taskmanger.manger.screens.tabs.HomeTabView
@@ -29,19 +30,14 @@
             super.onCreate(savedInstanceState)
             enableEdgeToEdge()
             setContent {
-               val currentUser = auth.currentUser
-               if (currentUser == null) {
-                    TaskMangerTheme {
-                        App(AppRoutes.SignInRoute)
-                    }
-             }else{
-                   TaskMangerTheme {
-                       App(AppRoutes.HomeTabRoute)
-                   }
-               }
-               }
+
+                TaskMangerTheme {
+                    App()
+                }
+
 
             }
+        }
        }
 
 
@@ -49,11 +45,11 @@
 
 
     @Composable
-    fun App(route : AppRoutes){
+    fun App(){
         val navController = rememberNavController()
         NavHost(
             navController = navController ,
-            startDestination= route ,
+            startDestination= AppRoutes.SplashScreenRoute ,
         ){
             composable <AppRoutes.HomeTabRoute>{
                 HomeTabView(navController)
@@ -63,6 +59,9 @@
             }
             composable <AppRoutes.SignUpRoute>{
                 SignUpView(navController)
+            }
+            composable <AppRoutes.SplashScreenRoute>{
+                SplashScreenView(navController)
             }
 
         }

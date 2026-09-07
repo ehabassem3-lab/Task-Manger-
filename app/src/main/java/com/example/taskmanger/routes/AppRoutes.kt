@@ -11,4 +11,7 @@ sealed class AppRoutes {
 
     @Serializable
     object SignUpRoute : AppRoutes()
+
+    @Serializable
+    object  SplashScreenRoute : AppRoutes()
 }
