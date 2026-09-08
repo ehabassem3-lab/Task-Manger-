@@ -24,9 +24,9 @@ fun HomeTabView(
     navController: NavController ,
     viewModel: SignInViewModel = hiltViewModel() ,
 ){
-    val s = viewModel.state.collectAsStateWithLifecycle().value.signOutApi
-    LaunchedEffect( s) {
-        when(s){
+    val s = viewModel.state.collectAsStateWithLifecycle().value
+    LaunchedEffect( s.signOutApi) {
+        when(s.signOutApi){
             is Resources.Error -> {}
             Resources.Idle ->     {}
             Resources.Loading ->  {}
