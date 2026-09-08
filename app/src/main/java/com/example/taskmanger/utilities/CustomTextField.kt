@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.input.TextFieldLineLimits
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -69,6 +70,7 @@ fun CustomTextField(
             )
         }
         TextField(
+             maxLines = 1,
             modifier = Modifier.weight(1f),
             value = text,
             onValueChange = onValueChange,

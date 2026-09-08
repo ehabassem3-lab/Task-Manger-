@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -39,7 +40,7 @@ fun SignInView(
     navController: NavController ,
       viewModel: SignInViewModel = hiltViewModel()
 ){
-    val state by viewModel.state.collectAsStateWithLifecycle()
+    val state =  viewModel.state.collectAsStateWithLifecycle().value
     LaunchedEffect(state.signInApi) {
         when(state.signInApi){
             is Resources.Error -> {}
@@ -123,10 +124,15 @@ fun SignInView(
 
             contentAlignment = Alignment.Center
         ){
-            Text(
-                "Log In " ,
-                style = AppTypography.bodyMedium.copy(fontSize = 26.sp , fontWeight = FontWeight.Bold , color = Primary)
-            )
+            if(state.signInApi is Resources.Loading ){
+                CircularProgressIndicator(color = Primary)
+            }else{
+                Text(
+                    "Log In " ,
+                    style = AppTypography.bodyMedium.copy(fontSize = 26.sp , fontWeight = FontWeight.Bold , color = Primary)
+                )
+            }
+
 
         }
 

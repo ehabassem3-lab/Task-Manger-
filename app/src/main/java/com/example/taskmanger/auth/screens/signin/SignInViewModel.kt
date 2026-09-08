@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.taskmanger.auth.di.domain.AuthRepository
 import com.example.taskmanger.utilities.Resources
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.ktor.client.request.request
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -34,10 +35,14 @@ class SignInViewModel @Inject constructor(
     }
 
     private fun signOut() {
-
         viewModelScope.launch {
-
-            authRepository.signOut()
+            state.value = state.value.copy(signOutApi = Resources.Loading)
+           val logOut =  authRepository.signOut()
+            if (logOut.isSuccess){
+                state.value =state.value.copy(signOutApi = Resources.Success(Unit))
+            }else{
+                state.value =state.value.copy(signOutApi = Resources.Error(Throwable(logOut.exceptionOrNull())))
+            }
         }
     }
 
