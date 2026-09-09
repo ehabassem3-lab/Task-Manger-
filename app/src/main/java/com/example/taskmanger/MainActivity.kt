@@ -10,6 +10,7 @@
     import androidx.navigation.compose.composable
     import androidx.navigation.compose.rememberNavController
     import com.example.taskmanger.auth.screens.SplashScreenView
+    import com.example.taskmanger.auth.screens.forgetpassword.ForgetPasswordView
     import com.example.taskmanger.auth.screens.signin.SignInView
     import com.example.taskmanger.auth.screens.signup.SignUpView
     import com.example.taskmanger.manger.screens.tabs.HomeTabView
@@ -62,6 +63,9 @@
             }
             composable <AppRoutes.SplashScreenRoute>{
                 SplashScreenView(navController)
+            }
+            composable <AppRoutes.ForgetPasswordRoute>{
+                ForgetPasswordView(navController)
             }
 
         }

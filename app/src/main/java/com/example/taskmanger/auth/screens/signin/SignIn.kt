@@ -102,7 +102,7 @@ fun SignInView(
             modifier = Modifier
                 .padding(start = 150.dp, top = 10.dp)
                 .clickable {
-
+                      navController.navigate(AppRoutes.ForgetPasswordRoute)
                 },
             style =  AppTypography.bodyMedium.copy(fontSize = 18.sp , color = Secondary  , fontWeight = FontWeight.Normal)
 
