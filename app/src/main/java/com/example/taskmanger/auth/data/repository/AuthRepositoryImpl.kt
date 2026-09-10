@@ -2,7 +2,7 @@ package com.example.taskmanger.auth.data.repository
 
 import android.util.Log
 import com.example.taskmanger.auth.data.AuthRemoteDataSource
-import com.example.taskmanger.auth.di.domain.AuthRepository
+import com.example.taskmanger.auth.domain.AuthRepository
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
@@ -36,5 +36,32 @@ class AuthRepositoryImpl @Inject constructor(
         }catch (e : Throwable){
         Result.failure(e)
         }
+    }
+
+    override suspend fun forgetPassword(email: String): Result<Unit> {
+        return  try {
+             val request = authRemoteDataSource.forgetPassword(email)
+            if (request.isSuccess){
+                Result.success(Unit)
+            }else{
+                Result.failure(Throwable(request.exceptionOrNull()))
+            }
+        }catch (e : Exception){
+            Result.failure(e)
+        }
+    }
+
+    override suspend fun verifyCode(code: String): Result<Unit> {
+      return try {
+                  val request = authRemoteDataSource.verifyCode(code)
+          if (request.isSuccess){
+              Result.success(Unit)
+          }else{
+              Result.failure(Throwable(request.exceptionOrNull()))
+          }
+      }catch (e : Exception){
+          Result.failure(e)
+      }
+
     }
 }
