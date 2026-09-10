@@ -16,4 +16,6 @@ sealed class AppRoutes {
     object  SplashScreenRoute : AppRoutes()
     @Serializable
     object  ForgetPasswordRoute : AppRoutes()
+    @Serializable
+    object  VerifyCodeRoute : AppRoutes()
 }

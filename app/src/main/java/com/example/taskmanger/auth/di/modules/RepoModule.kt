@@ -1,7 +1,7 @@
 package com.example.taskmanger.auth.di.modules
 
 import com.example.taskmanger.auth.data.repository.AuthRepositoryImpl
-import com.example.taskmanger.auth.di.domain.AuthRepository
+import com.example.taskmanger.auth.domain.AuthRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

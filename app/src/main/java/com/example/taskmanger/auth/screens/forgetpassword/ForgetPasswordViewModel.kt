@@ -1,7 +1,7 @@
 package com.example.taskmanger.auth.screens.forgetpassword
 
 import androidx.lifecycle.ViewModel
-import com.example.taskmanger.auth.di.domain.AuthRepository
+import com.example.taskmanger.auth.domain.AuthRepository
 import com.example.taskmanger.utilities.Resources
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

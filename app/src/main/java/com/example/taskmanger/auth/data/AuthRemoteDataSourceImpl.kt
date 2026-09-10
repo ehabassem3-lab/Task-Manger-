@@ -45,5 +45,25 @@ class AuthRemoteDataSourceImpl @Inject constructor(
 
 
     }
+
+    override suspend fun forgetPassword(email: String): Result<Unit> {
+        return    try {
+            firebaseAuth.sendPasswordResetEmail(email).await()
+            Result.success(Unit)
+
+        }catch (e : Exception){
+            Result.failure(e)
+        }
+
+    }
+
+    override suspend fun verifyCode(code: String): Result<Unit> {
+       return  try {
+           firebaseAuth.verifyPasswordResetCode(code).await()
+           Result.success(Unit)
+       }catch (e : Exception){
+           Result.failure(e)
+       }
+    }
 }
 

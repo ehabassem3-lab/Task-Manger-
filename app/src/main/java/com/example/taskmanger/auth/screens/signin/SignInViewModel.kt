@@ -2,7 +2,7 @@ package com.example.taskmanger.auth.screens.signin
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.taskmanger.auth.di.domain.AuthRepository
+import com.example.taskmanger.auth.domain.AuthRepository
 import com.example.taskmanger.utilities.Resources
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.ktor.client.request.request
