@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,19 +21,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.taskmanger.R
 import com.example.taskmanger.ui.theme.AppTypography
 import com.example.taskmanger.ui.theme.Primary
 import com.example.taskmanger.ui.theme.Secondary
 import com.example.taskmanger.utilities.CustomTextField
+import com.example.taskmanger.utilities.Resources
 
 @Composable
 fun VerifyCodeView(
     navController: NavController ,
     viewModel: ForgetPasswordViewModel = hiltViewModel()
 ){
-
+      val state = viewModel.state.collectAsStateWithLifecycle().value
 
     Column(
         modifier = Modifier
@@ -56,10 +59,10 @@ fun VerifyCodeView(
             modifier = Modifier.padding(top = 30.dp)
         )
         CustomTextField(
-            hintText = "Enter  Your  Email ",
-            text = "",
+            hintText = "Enter The Verification Code  ",
+            text = state.code,
             onValueChange ={
-                viewModel.onEvent(ForgetPasswordEvents.onEmailChange(it))
+                viewModel.onEvent(ForgetPasswordEvents.onCodeChange(it))
             }
         )
         Box(
@@ -72,15 +75,20 @@ fun VerifyCodeView(
                     RoundedCornerShape(12.dp)
                 )
                 .clickable {
-
+                    viewModel.onEvent(ForgetPasswordEvents.onVerifyCodeClick)
                 } ,
 
             contentAlignment = Alignment.Center
         ){
-            Text(
-                "Verify  Code" ,
-                style = AppTypography.bodyMedium.copy(fontSize = 26.sp , fontWeight = FontWeight.Bold , color = Primary)
-            )
+            if (state.verifyCodeApiState is Resources.Loading){
+                CircularProgressIndicator()
+            }else{
+                Text(
+                    "Verify  Code" ,
+                    style = AppTypography.bodyMedium.copy(fontSize = 26.sp , fontWeight = FontWeight.Bold , color = Primary)
+                )
+            }
+
 
         }
 
