@@ -10,9 +10,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -24,10 +26,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.taskmanger.R
 import com.example.taskmanger.auth.screens.signin.SignInEvents
+import com.example.taskmanger.routes.AppRoutes
 import com.example.taskmanger.ui.theme.AppTypography
 import com.example.taskmanger.ui.theme.Primary
 import com.example.taskmanger.ui.theme.Secondary
 import com.example.taskmanger.utilities.CustomTextField
+import com.example.taskmanger.utilities.Resources
 
 @Composable
 fun ForgetPasswordView(
@@ -35,7 +39,15 @@ fun ForgetPasswordView(
     viewModel: ForgetPasswordViewModel  = hiltViewModel()
 ){
     val state = viewModel.state.collectAsStateWithLifecycle().value
+    LaunchedEffect(state.forgetPasswordApiState) {
+        when(state.forgetPasswordApiState){
+            is Resources.Error -> {}
+            Resources.Idle -> {}
+            Resources.Loading -> {}
+            is Resources.Success<Unit> -> {navController.navigate(AppRoutes.VerifyCodeRoute)}
+        }
 
+    }
 
 
 
@@ -78,15 +90,20 @@ fun ForgetPasswordView(
                     RoundedCornerShape(12.dp)
                 )
                 .clickable {
-
+               viewModel.onEvent(ForgetPasswordEvents.onResetPasswordClick)
                 } ,
 
             contentAlignment = Alignment.Center
         ){
-            Text(
-                "Reset Password" ,
-                style = AppTypography.bodyMedium.copy(fontSize = 26.sp , fontWeight = FontWeight.Bold , color = Primary)
-            )
+            if (state.forgetPasswordApiState is Resources.Loading){
+                CircularProgressIndicator()
+            }else{
+                Text(
+                    "Reset Password" ,
+                    style = AppTypography.bodyMedium.copy(fontSize = 26.sp , fontWeight = FontWeight.Bold , color = Primary)
+                )
+            }
+
 
         }
 

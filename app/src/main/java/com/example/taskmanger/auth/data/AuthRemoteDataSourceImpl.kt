@@ -17,7 +17,8 @@ class AuthRemoteDataSourceImpl @Inject constructor(
 
     override suspend fun signIn(email: String, password: String) : Result<Unit> {
         return    try {
-            val request =  firebaseAuth.signInWithEmailAndPassword(email,password).await()
+
+              firebaseAuth.signInWithEmailAndPassword(email,password).await()
 
                   Result.success(Unit)
 
