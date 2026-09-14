@@ -18,4 +18,6 @@ sealed class AppRoutes {
     object  ForgetPasswordRoute : AppRoutes()
     @Serializable
     object  VerifyCodeRoute : AppRoutes()
+    @Serializable
+    object  NewPasswordRoute : AppRoutes()
 }
