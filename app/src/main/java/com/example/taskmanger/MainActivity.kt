@@ -11,6 +11,7 @@
     import androidx.navigation.compose.rememberNavController
     import com.example.taskmanger.auth.screens.SplashScreenView
     import com.example.taskmanger.auth.screens.forgetpassword.ForgetPasswordView
+    import com.example.taskmanger.auth.screens.forgetpassword.NewPasswordView
     import com.example.taskmanger.auth.screens.forgetpassword.VerifyCodeView
     import com.example.taskmanger.auth.screens.signin.SignInView
     import com.example.taskmanger.auth.screens.signup.SignUpView
@@ -71,6 +72,9 @@
             composable <AppRoutes.VerifyCodeRoute>{
                 VerifyCodeView(navController)
 
+            }
+            composable <AppRoutes.NewPasswordRoute>{
+                NewPasswordView(navController)
             }
 
         }
