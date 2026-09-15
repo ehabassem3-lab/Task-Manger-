@@ -12,9 +12,14 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -38,24 +43,32 @@ fun ForgetPasswordView(
     navController: NavController ,
     viewModel: ForgetPasswordViewModel  = hiltViewModel()
 ){
+    val snackBarHostState = remember { SnackbarHostState() }
     val state = viewModel.state.collectAsStateWithLifecycle().value
     LaunchedEffect(state.forgetPasswordApiState) {
         when(state.forgetPasswordApiState){
             is Resources.Error -> {}
             Resources.Idle -> {}
             Resources.Loading -> {}
-            is Resources.Success<Unit> -> {navController.navigate(AppRoutes.VerifyCodeRoute)}
+            is Resources.Success<Unit> -> {
+                snackBarHostState.showSnackbar("Check Your Email To Complete The Reset Operation")
+                navController.navigate(AppRoutes.SignInRoute)
+            }
         }
 
     }
 
 
-
-
+Scaffold(
+       snackbarHost = {
+           SnackbarHost(hostState = snackBarHostState)
+       }
+) {   it ->
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Primary)
+            .padding(it)
             .padding(top = 50.dp, bottom = 50.dp, start = 20.dp, end = 20.dp) ,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -64,6 +77,7 @@ fun ForgetPasswordView(
             contentDescription = "" ,
             tint = Secondary ,
             modifier = Modifier
+
                 .padding(top = 60.dp)
                 .size(200.dp)
 
@@ -90,7 +104,7 @@ fun ForgetPasswordView(
                     RoundedCornerShape(12.dp)
                 )
                 .clickable {
-               viewModel.onEvent(ForgetPasswordEvents.onResetPasswordClick)
+                    viewModel.onEvent(ForgetPasswordEvents.onResetPasswordClick)
                 } ,
 
             contentAlignment = Alignment.Center
@@ -105,8 +119,13 @@ fun ForgetPasswordView(
             }
 
 
+
         }
 
+
     }
+}
+
+
 
 }
