@@ -69,7 +69,7 @@ fun SignUpView(
         )
 
         CustomTextField(
-            text = state.email ,
+            text = state.password ,
             onValueChange = {viewModel.onEvent(SignUpEvents.onPassWordChange(it))}  ,
             hintText = "enter your password "
 
@@ -81,7 +81,7 @@ fun SignUpView(
         )
 
         CustomTextField(
-            text = state.email ,
+            text = state.phone ,
             onValueChange = {viewModel.onEvent(SignUpEvents.onPhoneChange(it))}  ,
             hintText = "enter your phone Number "
 
