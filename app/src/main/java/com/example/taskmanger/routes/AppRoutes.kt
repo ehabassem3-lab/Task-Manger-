@@ -7,7 +7,7 @@ sealed class AppRoutes {
 
     object SignInRoute : AppRoutes()
     @Serializable
-    object  HomeTabRoute : AppRoutes()
+    object  MainScreenRoute : AppRoutes()
 
     @Serializable
     object SignUpRoute : AppRoutes()
