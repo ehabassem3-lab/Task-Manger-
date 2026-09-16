@@ -6,6 +6,7 @@ import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,8 +14,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,12 +28,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.taskmanger.R
 import com.example.taskmanger.auth
 import com.example.taskmanger.routes.AppRoutes
+import com.example.taskmanger.ui.theme.AppTypography
+import com.example.taskmanger.ui.theme.Primary
 import com.example.taskmanger.ui.theme.Secondary
 import kotlinx.coroutines.delay
 
@@ -81,25 +85,24 @@ fun SplashScreenView(navController: NavController){
         } else {
             delay(3000)
 
-            navController.navigate(AppRoutes.HomeTabRoute)
+            navController.navigate(AppRoutes.MainScreenRoute)
         }
     }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(colorScheme.background),
+            .background(Primary),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
 
-        Icon(
-            painter = painterResource(R.drawable.ic_sign_in),
+        Image(
+            painter = painterResource(R.drawable.ic_settings),
             contentDescription = null,
-//            tint = Secondary,
             modifier = Modifier
                 .offset(y = logoOffset)
-                .size(225.dp * logoScale.value)
+                .size(200.dp * logoScale.value)
         )
 
         if (showText) {
@@ -108,10 +111,15 @@ fun SplashScreenView(navController: NavController){
 
             Text(
                 text = "Task Manger",
-
                 color = colorScheme.onBackground,
+                style = AppTypography.titleLarge.copy(
+                    color = Secondary ,
+                    fontWeight = FontWeight.Bold ,
+                    fontSize = 32.sp
+                ),
                 modifier = Modifier
-                    .offset(y = -180.dp)
+                    .padding(vertical =  40.dp)
+                    .offset(y = -250.dp)
                     .graphicsLayer {
                         scaleX = textScale.value
                         scaleY = textScale.value

@@ -15,7 +15,7 @@
     import com.example.taskmanger.auth.screens.forgetpassword.VerifyCodeView
     import com.example.taskmanger.auth.screens.signin.SignInView
     import com.example.taskmanger.auth.screens.signup.SignUpView
-    import com.example.taskmanger.manger.screens.tabs.HomeTabView
+    import com.example.taskmanger.manger.screens.MainScreenView
     import com.example.taskmanger.routes.AppRoutes
     import com.example.taskmanger.ui.theme.TaskMangerTheme
     import com.google.firebase.Firebase
@@ -54,8 +54,8 @@
             navController = navController ,
             startDestination= AppRoutes.SplashScreenRoute ,
         ){
-            composable <AppRoutes.HomeTabRoute>{
-                HomeTabView(navController)
+            composable <AppRoutes.MainScreenRoute>{
+                MainScreenView(navController)
             }
             composable <AppRoutes.SignInRoute>{
                 SignInView(navController)
