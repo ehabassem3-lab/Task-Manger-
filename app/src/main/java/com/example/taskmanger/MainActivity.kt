@@ -31,7 +31,6 @@
             installSplashScreen()
             auth = Firebase.auth
             super.onCreate(savedInstanceState)
-            enableEdgeToEdge()
             setContent {
 
                 TaskMangerTheme {
