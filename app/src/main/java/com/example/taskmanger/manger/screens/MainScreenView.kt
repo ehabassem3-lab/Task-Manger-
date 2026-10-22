@@ -79,15 +79,12 @@ fun MainScreenView(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(
-                        color = Secondary,
-                        shape = RoundedCornerShape(
-                            topStart = 24.dp,
-                            topEnd = 24.dp
-                        )
-                    )
+                    .background(color = Secondary, RoundedCornerShape(topStart = 24.dp , topEnd = 24.dp))
+
+
             ) {
                 NavigationBar (
+
                     modifier = Modifier.background(Color.White,  RoundedCornerShape(18.dp)) ,
                     containerColor = Color.Transparent ,
                     contentColor = Color.Transparent ,
@@ -127,7 +124,7 @@ fun MainScreenView(
                             }
                         )
 
-
+ 
                     }
 
                 }

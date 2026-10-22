@@ -16,7 +16,7 @@ fun HomeView(navController: NavController){
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(Color.Black)
             .padding(start = 5.dp , end = 5.dp , top = 20.dp)
     ) {
 
