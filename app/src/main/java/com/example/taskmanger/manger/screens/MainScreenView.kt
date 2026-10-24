@@ -32,6 +32,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontVariation
@@ -76,21 +77,17 @@ fun MainScreenView(
     Scaffold(
         topBar = {} ,
         bottomBar = {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(color = Secondary, RoundedCornerShape(topStart = 24.dp , topEnd = 24.dp))
 
 
-            ) {
                 NavigationBar (
+                    modifier = Modifier
+                     .clip(RoundedCornerShape(18.dp)),
+                    contentColor = Color.White,
+                       containerColor = Color.White
 
-                    modifier = Modifier.background(Color.White,  RoundedCornerShape(18.dp)) ,
-                    containerColor = Color.Transparent ,
-                    contentColor = Color.Transparent ,
 
 
-                    ) {
+                ) {
                     for (tab in tabes){
                         val isSelected = tab.index == selectedIndex
                         NavigationBarItem(
@@ -124,10 +121,10 @@ fun MainScreenView(
                             }
                         )
 
- 
+
                     }
 
-                }
+
             }
 
         }
