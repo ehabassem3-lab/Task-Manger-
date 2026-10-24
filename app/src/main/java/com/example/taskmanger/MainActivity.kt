@@ -32,7 +32,6 @@
             auth = Firebase.auth
             super.onCreate(savedInstanceState)
             setContent {
-
                 TaskMangerTheme {
                     App()
                 }
