@@ -6,10 +6,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemColors
@@ -27,12 +27,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.taskmanger.R
-import com.example.taskmanger.manger.screens.tabs.HomeView
-import com.example.taskmanger.manger.screens.tabs.ProfileView
-import com.example.taskmanger.manger.screens.tabs.SettingsView
-import com.example.taskmanger.manger.screens.tabs.TasksView
-import com.example.taskmanger.ui.theme.Primary
-import com.example.taskmanger.ui.theme.Secondary
+import com.example.taskmanger.manger.screens.tabs.home.HomeView
+import com.example.taskmanger.manger.screens.tabs.profile.ProfileView
+import com.example.taskmanger.manger.screens.tabs.settings.SettingsView
+import com.example.taskmanger.manger.screens.tabs.tasks.TasksView
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -49,18 +47,19 @@ fun MainScreenView(
         tabItem(2, R.drawable.ic_setting),
         tabItem(3, R.drawable.ic_profile)
     )
+
+
+    val colorScheme = MaterialTheme.colorScheme
     val colorsNavItem = NavigationBarItemColors(
-        selectedIconColor = Secondary,
+        selectedIconColor = colorScheme.background,
         selectedTextColor = Color.Transparent,
-        unselectedIconColor = Primary,
+        unselectedIconColor = colorScheme.onBackground,
         unselectedTextColor = Color.Transparent,
-        disabledIconColor = Primary,
+        disabledIconColor = colorScheme.onBackground,
         disabledTextColor = Color.Transparent,
         selectedIndicatorColor = Color.Transparent,
 
         )
-
-
     var selectedIndex by rememberSaveable { mutableIntStateOf(0) }
 
     Scaffold(
@@ -73,10 +72,8 @@ fun MainScreenView(
                 modifier = Modifier
                     .fillMaxWidth(),
                 shape = RoundedCornerShape(28.dp),
-                color = Color.White,
+                color = colorScheme.background,
             ) {
-
-
                 NavigationBar(
                     containerColor = Color.Transparent
                 ) {
@@ -92,7 +89,7 @@ fun MainScreenView(
                                     modifier = Modifier
                                         .size(68.dp)
                                         .background(
-                                            if (isSelected) Primary else Secondary,
+                                            if (isSelected) colorScheme.onBackground else colorScheme.background,
                                             RoundedCornerShape(12.dp)
                                         )
 
