@@ -1,98 +1,96 @@
-    package com.example.taskmanger
+package com.example.taskmanger
 
-    import android.os.Bundle
-    import androidx.activity.ComponentActivity
-    import androidx.activity.compose.setContent
-    import androidx.activity.enableEdgeToEdge
-    import androidx.compose.runtime.Composable
-    import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-    import androidx.navigation.compose.NavHost
-    import androidx.navigation.compose.composable
-    import androidx.navigation.compose.rememberNavController
-    import com.example.taskmanger.auth.screens.SplashScreenView
-    import com.example.taskmanger.auth.screens.forgetpassword.ForgetPasswordView
-    import com.example.taskmanger.auth.screens.forgetpassword.NewPasswordView
-    import com.example.taskmanger.auth.screens.forgetpassword.VerifyCodeView
-    import com.example.taskmanger.auth.screens.signin.SignInView
-    import com.example.taskmanger.auth.screens.signup.SignUpView
-    import com.example.taskmanger.manger.screens.MainScreenView
-    import com.example.taskmanger.routes.AppRoutes
-    import com.example.taskmanger.ui.theme.TaskMangerTheme
-    import com.google.firebase.Firebase
-    import com.google.firebase.auth.FirebaseAuth
-    import com.google.firebase.auth.auth
-    import dagger.hilt.android.AndroidEntryPoint
-     lateinit var auth: FirebaseAuth
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.taskmanger.auth.screens.SplashScreenView
+import com.example.taskmanger.auth.screens.forgetpassword.ForgetPasswordView
+import com.example.taskmanger.auth.screens.forgetpassword.NewPasswordView
+import com.example.taskmanger.auth.screens.forgetpassword.VerifyCodeView
+import com.example.taskmanger.auth.screens.signin.SignInView
+import com.example.taskmanger.auth.screens.signup.SignUpView
+import com.example.taskmanger.manger.screens.MainScreenView
+import com.example.taskmanger.routes.AppRoutes
+import com.example.taskmanger.ui.theme.TaskMangerTheme
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
+import dagger.hilt.android.AndroidEntryPoint
 
-    @AndroidEntryPoint
+lateinit var auth: FirebaseAuth
 
-    class MainActivity : ComponentActivity() {
-        override fun onCreate(savedInstanceState: Bundle?) {
-            installSplashScreen()
-            auth = Firebase.auth
-            super.onCreate(savedInstanceState)
-            setContent {
-                TaskMangerTheme {
-                    App()
-                }
+@AndroidEntryPoint
 
-
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
+        auth = Firebase.auth
+        super.onCreate(savedInstanceState)
+        setContent {
+            TaskMangerTheme {
+                App()
             }
-        }
-       }
 
-
-
-
-
-    @Composable
-    fun App(){
-        val navController = rememberNavController()
-        NavHost(
-            navController = navController ,
-            startDestination= AppRoutes.SplashScreenRoute ,
-        ){
-            composable <AppRoutes.MainScreenRoute>{
-                MainScreenView(navController)
-            }
-            composable <AppRoutes.SignInRoute>{
-                SignInView(navController)
-            }
-            composable <AppRoutes.SignUpRoute>{
-                SignUpView(navController)
-            }
-            composable <AppRoutes.SplashScreenRoute>{
-                SplashScreenView(navController)
-            }
-            composable <AppRoutes.ForgetPasswordRoute>{
-                ForgetPasswordView(navController)
-            }
-            composable <AppRoutes.VerifyCodeRoute>{
-                VerifyCodeView(navController)
-
-            }
-            composable <AppRoutes.NewPasswordRoute>{
-                NewPasswordView(navController)
-            }
 
         }
     }
+}
 
 
+@Composable
+fun App() {
+    val navController = rememberNavController()
+    NavHost(
+        navController = navController,
+        startDestination = AppRoutes.SplashScreenRoute,
+    ) {
+        composable<AppRoutes.MainScreenRoute> {
+            MainScreenView(navController)
+        }
+        composable<AppRoutes.SignInRoute> {
+            SignInView(navController)
+        }
+        composable<AppRoutes.SignUpRoute> {
+            SignUpView(navController)
+        }
+        composable<AppRoutes.SplashScreenRoute> {
+            SplashScreenView(navController)
+        }
+        composable<AppRoutes.ForgetPasswordRoute> {
+            ForgetPasswordView(navController)
+        }
+        composable<AppRoutes.VerifyCodeRoute> {
+            VerifyCodeView(navController)
 
-    //@Preview(showBackground = true)
-    //@Composable
-    //fun Preview() {
-    //    CustomTextField(
-    //        text = "ehab ",
-    //        hintText = "ehab assem ",
-    //        onValueChange = {},
-    //        isSearchBar = true,
-    //        onSearchClick = {} ,
-    //        isPassword = true
-    //    )
-    //
-    //
-    //}
+        }
+        composable<AppRoutes.NewPasswordRoute> {
+            NewPasswordView(navController)
+        }
+
+    }
+}
+
+
+//@Preview(showBackground = true)
+//@Composable
+//fun Preview() {
+//    CustomTextField(
+//        text = "ehab ",
+//        hintText = "ehab assem ",
+//        onValueChange = {},
+//        isSearchBar = true,
+//        onSearchClick = {} ,
+//        isPassword = true
+//    )
+//
+//
+//}
 
 
