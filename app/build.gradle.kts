@@ -53,11 +53,16 @@ android {
 }
 
 dependencies {
+    // =========================
+    // FIreBase
+    // =========================
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.firestore)
+
 
     // =========================
     // Core
     // =========================
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.activity.compose)
